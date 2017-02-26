@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/resources/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/local/style.css">
+
+    <!--Javascript-->
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="js/resources/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="js/resources/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/resources/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="js/local/client.js"></script>
+
+    <script src="js/local/client.js"></script>
+    <!-- <script src="js/local/server.js"></script> -->
+
+    <script type="text/javascript">
+$(document).ready(function() {
+    var holes = 4;
+    var rows = 12;
+    var numColors = 6;
+    var curRound = rows;
+    var selectColor="black";
+    var selectRow = 12;
+    var selectCol = 1;
+   
+    
+    createEmptyTable();
+    colorList = ["rgb(255, 153, 153)", "rgb(0, 0, 255)", "rgb(0, 255, 0)", "rgb(255, 255, 0)", "rgb(128, 128, 0)", "rgb(128, 0, 128)", "rgb(0, 0, 0)"]
+    hexList = ['#FF9999', '#0000FF', '#00FF00', '#FFFF00', '#808000', '#000000'];
+    
+    $(".rect").click(function() {
+        selectColor = colorList[parseInt(this.id.charAt(0))];
+        //alert(selectColor); 
+    });
+    
+    $(".circle").click(function() {
+        var c = this.id.charAt(1);
+        var row;
+        var col;
+        if((c >= '0') && (c<='9'))  {
+            selectRow = this.id.substr(0,2);
+            selectCol = this.id.substr(3,1);
+        }
+        else {
+            selectRow = this.id.substr(0,1);
+            selectCol = this.id.substr(2,1);
+        }
+        
+        if(selectRow == curRound){
+            $('#'+this.id).css('background',selectColor);
+        }
+        //alert(this.id);
+        //selectColor = colorList[parseInt(this.id.charAt(0))];
+        //alert(row+" "+col); 
+    });
+    
+    function getHex(col){
+        //alert(col);
+        for(var i=0;i<numColors;i++){
+            if(col == colorList[i]) return hexList[i];
+        }
+    }
+    
+    
+   $("#checkBtn").click(function() {
+        var b = false;
+        var colList = []
+        var jStr = '{';
+        for(var i=1;i<=holes;i++){    //holes
+            var idX = selectRow+'_'+i+'_'+'tab';
+            //alert(idX);
+            var x = $('#'+idX).css('background-color'); 
+            if(x == "rgb(0, 0, 0)")    {
+                
+//                    $("#alertMsg").show().delay(10000);
+  //                  $("#alertMsg").hide();
+                    alert("Empty bubble shouldn't exist in current step");
+                    b = true;
+                    break;
+                }
+                else    {
+                    var curCol = getHex(x);
+                    jStr = jStr+'{ "color" : "'+curCol+'"}';
+                    colList.push(curCol);
+                }
+            }
+            if(b == false){
+                jStr = jStr+'}';
+                updateInfo(colList, jStr);
+                curRound--;
+            }
+    });
+    
+    
+    function createEmptyTable(){
+        var rowStr1 = "<tr>";
+        var rowStr2 = "</tr>";
+        
+        var colStr1 = '<td><div class="circle" id=';
+        var colStr2 = '></div></div></td>';
+        var accStr1 = '<td><table>';
+        var accStr2 = '<td><div class="s_circle" id=';
+        var accStr3 = '</table>';
+        var td = "</td>";
+        var sizeStr1 = '<div style="height:10px;overflow:hidden;">'
+        var sizeStr2 = '</div>'
+        var tabStr;
+        var rowVal = rows;
+        
+        for(var i=1;i<=rows;i++)
+        {
+            tabStr="";
+            tabStr = rowStr1;
+            rowVal--;
+            //alert(tabStr);
+            for(var j=1;j<=holes;j++)
+            {
+                id = '"'+i+'_'+j+'_tab"';
+                //if(i == 1)  tabStr = tabStr+colStrInit+id+colStr2;
+                tabStr = tabStr+colStr1+id+colStr2;
+                
+            }
+            tabStr=tabStr+accStr1;
+            
+            for(var x=1;x<=holes/2;x++)
+            {
+                tabStr = tabStr+rowStr1;
+                for(var j=1;j<=holes/2;j++)
+                {
+                    id = '"'+x+'_'+j+'_acc"';
+                    tabStr = tabStr+accStr2+id+colStr2;
+                }
+                tabStr=tabStr+rowStr2;
+            }
+            tabStr = tabStr+accStr3+td+rowStr2;
+            
+            $("#tab").append(tabStr);
+            //$("#tab").append('</br>');
+           
+           
+        }
+    }
+ });   
+</script>
+
+  </head>
+  <body>
+    <h1><center>Master Mind Game</center></h1>
+
+    <div class="container">
+        <div class = "row"></div>
+    <div class = "row">
+         <div class="col-md-5">
+         <p> Instructions:
+                1 - Red tells position and color are in place 
+                2 - White tells only color in place
+                </p>
+         <div id="content"></div>
+        <div>
+            <span id="status">Connecting...</span>
+            <input type="text" id="input" disabled="disabled" />
+        </div>
+               
+        </div>         
+        <div class="col-md-3">
+        <table  style="width:20%;" >
+            <tbody id="tab">
+            </tbody>
+        </table>
+        </div>
+         <div class="col-md-4">
+         <table >
+            <tbody id="colors">
+                       <tr>
+                            <td><div id="0_col" class="rect" style="background-color:rgb(255,153,153)"></div></td>
+                            <td><div id="1_col" class="rect" style="background-color:rgb(0,0,255)"></div></td>
+                            <td><div id="2_col" class="rect" style="background-color:rgb(0,255,0)"></div></td>
+                        </tr>
+                        <tr>
+                            <td><div id="3_col" class="rect" style="background-color:rgb(255,255,0)"></div></td>
+                            <td><div id="4_col" class="rect" style="background-color:rgb(128,128,0)"></div></td>
+                             <td><div id="5_col" class="rect" style="background-color:rgb(128,0,128)"></div></td>
+                        </tr>
+                    
+            </tbody>
+        </table><br/>
+        <button type="button" id="checkBtn" class="btn btn-primary btn-lg">Check Now</button>
+        <div class="alert alert-success  role="alert" id="alertMsg" style="display: none;">
+            <strong>Well done!</strong> Black bubbles shouldn't be empty
+        </div>
+        </div>
+    </div>
+    </div>
+  </body>
+</html>
+

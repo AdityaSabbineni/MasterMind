@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/resources/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/local/style.css">
+
+    <!--Javascript-->
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="js/resources/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="js/resources/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/resources/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/local/client.js"></script>
+    <script type="text/javascript" src="js/local/js/code.js"></script>
+</head>
+  <body>
+  
+    <h1 style="color:#66ff33"><b><center>Master Mind Game</center></b></h1><br/><br/>
+
+    <div class="container">
+        <div class = "row"></div>
+    <div class = "row">
+         <div class="col-md-5">
+         <button type="button" id="gameBtn" class="btn btn-primary btn-lg">End Game</button>
+         <p> <h4>Instructions:</h4><br/>
+                <p><b>General:</b></p>
+                <p>1. All black color pegs indicate empty pegs</p>
+                <p>2. All red color status pegs indicate no status yet</p>
+               
+                
+                 <p><b>Status Pegs:</b><br/></p>
+                <p style="color:orange;"><b>1. Orange - Color and Position of Codemaker and Code breaker match</b><br/></p>
+                <p style="color:brown;"><b>2. Brown - Only Color of Codemaker and Code breaker match</b><br/></p>
+                <p style="color:cyan;"><b>3. Cyan - Neither Color nor Position match</b><br/></p>
+        </p>
+         <div id="content"></div>
+        <div>
+            <!--<span id="status">You are:</span>-->
+            <!--<input type="text" id="input" disabled="disabled" />-->
+            <div id="Role"></div>
+        </div>
+               
+        </div>         
+        <div class="col-md-3">
+        <table  style="width:20%;" >
+            <tbody id="tab">
+            </tbody>
+        </table>
+        </div>
+         <div class="col-md-4">
+         <table >
+            <tbody id="colors">
+                       <tr>
+                            <td><div id="0_col" class="rect" style="background-color:rgb(255,153,153)"></div></td>
+                            <td><div id="1_col" class="rect" style="background-color:rgb(0,0,255)"></div></td>
+                            <td><div id="2_col" class="rect" style="background-color:rgb(0,255,0)"></div></td>
+                        </tr>
+                        <tr>
+                            <td><div id="3_col" class="rect" style="background-color:rgb(255,255,0)"></div></td>
+                            <td><div id="4_col" class="rect" style="background-color:rgb(128, 128, 0)"></div></td>
+                             <td><div id="5_col" class="rect" style="background-color:rgb(128,0,128)"></div></td>
+                        </tr>
+                    
+            </tbody>
+        </table><br/>
+        <button type="button" id="checkBtn" class="btn btn-primary btn-lg"  style="display: none;">Check Now</button><br/><br/>
+        <button type="button" id="setBtn" class="btn btn-primary btn-lg" style="display: none;">Set Now</button><br/><br/>
+        <div class="row">
+        <div id="actCode"></div>
+        <div id="code" >
+             <table >
+            <tbody id="codeKey">
+            <tr>
+            <td><div id="1_code" class="rectKey" style="background-color:rgb(0,0,0)"></div></td>
+            <td><div id="2_code" class="rectKey" style="background-color:rgb(0,0,0)"></div></td>
+            <td><div id="3_code" class="rectKey" style="background-color:rgb(0,0,0)"></div></td>
+            <td><div id="4_code" class="rectKey" style="background-color:rgb(0,0,0)"></div></td>
+            </tr>
+            </table>
+        </div>
+        <div id="restartGame"></div>
+        </div>
+        </div>
+    </div>
+    </div>
+  </body>
+</html>
+
