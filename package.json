@@ -1,0 +1,19 @@
+{
+  "name": "mastermind",
+  "version": "1.0.0",
+  "description": "MasterMind game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdityaSabbineni/MasterMind.git"
+  },
+  "author": "Aditya Sabbineni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdityaSabbineni/MasterMind/issues"
+  },
+  "homepage": "https://github.com/AdityaSabbineni/MasterMind#readme"
+}
